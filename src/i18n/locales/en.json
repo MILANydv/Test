@@ -1,0 +1,74 @@
+{
+  "app": {
+    "name": "Referral Management System",
+    "tagline": "Track, Manage, and Reward Your Referrals"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "campaigns": "Campaigns",
+    "referrals": "Referrals",
+    "rewards": "Rewards",
+    "analytics": "Analytics",
+    "users": "Users",
+    "stores": "Stores",
+    "settings": "Settings",
+    "approvals": "Approvals"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "phone": "Phone",
+    "forgotPassword": "Forgot Password?"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalReferrals": "Total Referrals",
+    "activeReferrals": "Active Referrals",
+    "convertedReferrals": "Converted Referrals",
+    "totalCommissions": "Total Commissions",
+    "pendingCommissions": "Pending Commissions",
+    "paidCommissions": "Paid Commissions",
+    "conversionRate": "Conversion Rate",
+    "topReferrers": "Top Referrers"
+  },
+  "campaigns": {
+    "title": "Campaigns",
+    "createCampaign": "Create Campaign",
+    "editCampaign": "Edit Campaign",
+    "name": "Campaign Name",
+    "description": "Description",
+    "status": "Status",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "commissionType": "Commission Type",
+    "commissionValue": "Commission Value",
+    "targetReferrals": "Target Referrals"
+  },
+  "referrals": {
+    "title": "Referrals",
+    "referralCode": "Referral Code",
+    "referrer": "Referrer",
+    "customer": "Customer",
+    "status": "Status",
+    "source": "Source",
+    "createdAt": "Created At"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "actions": "Actions",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "app": {
+    "name": "रेफरल व्यवस्थापन प्रणाली",
+    "tagline": "आफ्नो रेफरलहरू ट्र्याक, व्यवस्थापन र पुरस्कृत गर्नुहोस्"
+  },
+  "nav": {
+    "dashboard": "ड्यासबोर्ड",
+    "campaigns": "अभियानहरू",
+    "referrals": "रेफरलहरू",
+    "rewards": "पुरस्कारहरू",
+    "analytics": "विश्लेषण",
+    "users": "प्रयोगकर्ताहरू",
+    "stores": "स्टोरहरू",
+    "settings": "सेटिङहरू",
+    "approvals": "स्वीकृतिहरू"
+  },
+  "auth": {
+    "login": "लगइन",
+    "logout": "लगआउट",
+    "register": "दर्ता",
+    "email": "इमेल",
+    "password": "पासवर्ड",
+    "name": "नाम",
+    "phone": "फोन",
+    "forgotPassword": "पासवर्ड बिर्सनुभयो?"
+  },
+  "dashboard": {
+    "title": "ड्यासबोर्ड",
+    "totalReferrals": "कुल रेफरलहरू",
+    "activeReferrals": "सक्रिय रेफरलहरू",
+    "convertedReferrals": "रूपान्तरित रेफरलहरू",
+    "totalCommissions": "कुल कमिसनहरू",
+    "pendingCommissions": "पेन्डिङ कमिसनहरू",
+    "paidCommissions": "भुक्तानी भएका कमिसनहरू",
+    "conversionRate": "रूपान्तरण दर",
+    "topReferrers": "शीर्ष रेफररहरू"
+  },
+  "campaigns": {
+    "title": "अभियानहरू",
+    "createCampaign": "अभियान सिर्जना गर्नुहोस्",
+    "editCampaign": "अभियान सम्पादन गर्नुहोस्",
+    "name": "अभियानको नाम",
+    "description": "विवरण",
+    "status": "स्थिति",
+    "startDate": "सुरु मिति",
+    "endDate": "अन्त्य मिति",
+    "commissionType": "कमिसन प्रकार",
+    "commissionValue": "कमिसन मूल्य",
+    "targetReferrals": "लक्षित रेफरलहरू"
+  },
+  "referrals": {
+    "title": "रेफरलहरू",
+    "referralCode": "रेफरल कोड",
+    "referrer": "रेफरर",
+    "customer": "ग्राहक",
+    "status": "स्थिति",
+    "source": "स्रोत",
+    "createdAt": "सिर्जना मिति"
+  },
+  "common": {
+    "save": "सुरक्षित गर्नुहोस्",
+    "cancel": "रद्द गर्नुहोस्",
+    "delete": "मेटाउनुहोस्",
+    "edit": "सम्पादन गर्नुहोस्",
+    "view": "हेर्नुहोस्",
+    "search": "खोज्नुहोस्",
+    "filter": "फिल्टर",
+    "export": "निर्यात गर्नुहोस्",
+    "actions": "कार्यहरू",
+    "loading": "लोड हुँदैछ...",
+    "error": "त्रुटि",
+    "success": "सफलता"
+  }
+}
