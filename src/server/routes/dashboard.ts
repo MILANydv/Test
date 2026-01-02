@@ -104,14 +104,14 @@ router.get('/metrics', async (req, res) => {
       take: 5,
     });
 
-    const topReferrersData = topReferrers.map((user) => ({
+    const topReferrersData = topReferrers.map((user: any) => ({
       userId: user.id,
       name: user.name,
       referralCount: user.referralsMade.length,
       totalCommission: user.referralsMade.reduce(
-        (sum, referral) =>
+        (sum: number, referral: any) =>
           sum +
-          referral.rewards.reduce((rewardSum, reward) => rewardSum + reward.amount, 0),
+          referral.rewards.reduce((rewardSum: number, reward: any) => rewardSum + reward.amount, 0),
         0
       ),
     }));
