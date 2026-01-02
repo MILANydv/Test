@@ -1,0 +1,267 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  BUSINESS_OWNER
+  STORE_MANAGER
+  REFERRER
+  CUSTOMER
+}
+
+enum CampaignStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  CLOSED
+}
+
+enum ReferralStatus {
+  INVITED
+  SIGNED_UP
+  CONVERTED
+  ACTIVE
+  REJECTED
+}
+
+enum CommissionType {
+  FLAT
+  PERCENTAGE
+  TIERED
+}
+
+enum CommissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PAID
+}
+
+enum PayoutMethod {
+  BANK_TRANSFER
+  FONEPAY
+  ESEWA
+  IME_PAY
+}
+
+model User {
+  id                String              @id @default(cuid())
+  email             String              @unique
+  name              String
+  password          String
+  phone             String?
+  role              UserRole            @default(CUSTOMER)
+  organizationId    String?
+  storeIds          String[]
+  emailVerified     DateTime?
+  active            Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  organization      Organization?       @relation(fields: [organizationId], references: [id])
+  referralsMade     Referral[]          @relation("Referrer")
+  referralsReceived Referral[]          @relation("ReferredCustomer")
+  rewards           ReferralReward[]
+  approvals         CommissionApproval[]
+  auditLogs         AuditLog[]
+
+  @@index([organizationId])
+  @@index([email])
+}
+
+model Organization {
+  id              String    @id @default(cuid())
+  name            String
+  email           String
+  phone           String
+  pan             String?
+  vat             String?
+  address         String?
+  city            String?
+  country         String    @default("Nepal")
+  active          Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  users           User[]
+  stores          Store[]
+  campaigns       Campaign[]
+  auditLogs       AuditLog[]
+
+  @@index([name])
+}
+
+model Store {
+  id              String    @id @default(cuid())
+  name            String
+  organizationId  String
+  address         String?
+  city            String?
+  phone           String?
+  active          Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  organization    Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  campaignStores  CampaignStore[]
+  referrals       Referral[]
+
+  @@index([organizationId])
+  @@index([name])
+}
+
+model Campaign {
+  id                    String          @id @default(cuid())
+  name                  String
+  description           String?
+  organizationId        String
+  commissionType        CommissionType
+  commissionValue       Float
+  commissionTiers       Json?
+  status                CampaignStatus  @default(DRAFT)
+  startDate             DateTime
+  endDate               DateTime?
+  targetReferrals       Int?
+  maxCommissionPerReferrer Float?
+  terms                 String?
+  active                Boolean         @default(true)
+  createdAt             DateTime        @default(now())
+  updatedAt             DateTime        @updatedAt
+
+  organization          Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  campaignStores        CampaignStore[]
+  referrals             Referral[]
+
+  @@index([organizationId])
+  @@index([status])
+}
+
+model CampaignStore {
+  id          String   @id @default(cuid())
+  campaignId  String
+  storeId     String
+  createdAt   DateTime @default(now())
+
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, storeId])
+  @@index([campaignId])
+  @@index([storeId])
+}
+
+model Referral {
+  id                  String          @id @default(cuid())
+  referralCode        String          @unique
+  campaignId          String
+  storeId             String
+  referrerId          String
+  referredCustomerId  String?
+  referredName        String?
+  referredEmail       String?
+  referredPhone       String?
+  source              String?
+  status              ReferralStatus  @default(INVITED)
+  metadata            Json?
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+
+  campaign            Campaign        @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  store               Store           @relation(fields: [storeId], references: [id], onDelete: Cascade)
+  referrer            User            @relation("Referrer", fields: [referrerId], references: [id], onDelete: Cascade)
+  referredCustomer    User?           @relation("ReferredCustomer", fields: [referredCustomerId], references: [id])
+  rewards             ReferralReward[]
+
+  @@index([campaignId])
+  @@index([storeId])
+  @@index([referrerId])
+  @@index([referralCode])
+}
+
+model ReferralReward {
+  id                  String            @id @default(cuid())
+  referralId          String
+  userId              String
+  amount              Float
+  currency            String            @default("NPR")
+  commissionType      CommissionType
+  status              CommissionStatus  @default(PENDING)
+  approvedBy          String?
+  approvedAt          DateTime?
+  paidAt              DateTime?
+  notes               String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  referral            Referral          @relation(fields: [referralId], references: [id], onDelete: Cascade)
+  user                User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  approvals           CommissionApproval[]
+  transactions        Transaction[]
+
+  @@index([referralId])
+  @@index([userId])
+  @@index([status])
+}
+
+model CommissionApproval {
+  id                String            @id @default(cuid())
+  rewardId          String
+  approvedBy        String
+  status            String
+  comments          String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  reward            ReferralReward    @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+  approver          User              @relation(fields: [approvedBy], references: [id])
+
+  @@index([rewardId])
+  @@index([approvedBy])
+}
+
+model Transaction {
+  id                String          @id @default(cuid())
+  rewardId          String
+  amount            Float
+  currency          String          @default("NPR")
+  payoutMethod      PayoutMethod
+  referenceNumber   String?
+  status            String
+  metadata          Json?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  reward            ReferralReward  @relation(fields: [rewardId], references: [id], onDelete: Cascade)
+
+  @@index([rewardId])
+  @@index([status])
+}
+
+model AuditLog {
+  id                String        @id @default(cuid())
+  userId            String?
+  organizationId    String?
+  action            String
+  entity            String
+  entityId          String
+  changes           Json?
+  ipAddress         String?
+  userAgent         String?
+  createdAt         DateTime      @default(now())
+
+  user              User?         @relation(fields: [userId], references: [id])
+  organization      Organization? @relation(fields: [organizationId], references: [id])
+
+  @@index([userId])
+  @@index([organizationId])
+  @@index([entity, entityId])
+  @@index([createdAt])
+}
