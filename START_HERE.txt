@@ -1,0 +1,63 @@
+═══════════════════════════════════════════════════════════════════════════
+   🚀 REFERRAL MANAGEMENT SAAS - QUICK START
+═══════════════════════════════════════════════════════════════════════════
+
+✅ EVERYTHING IS READY! Just run:
+
+    ./dev.sh
+
+OR manually in 2 terminals:
+
+    Terminal 1: npm run server
+    Terminal 2: npm run dev
+
+───────────────────────────────────────────────────────────────────────────
+📱 ACCESS THE APP
+───────────────────────────────────────────────────────────────────────────
+
+Frontend:  http://localhost:5173
+Backend:   http://localhost:3000
+Health:    http://localhost:3000/api/health
+
+───────────────────────────────────────────────────────────────────────────
+👤 FIRST TIME SETUP
+───────────────────────────────────────────────────────────────────────────
+
+1. Open http://localhost:5173
+2. Click "Register" (bottom of login page)
+3. Create your account:
+   - Name: Your Name
+   - Email: your@email.com  
+   - Password: password123
+   - Phone: +977-9841234567
+   - Organization: Your Company Name
+
+4. You'll be logged in automatically!
+
+───────────────────────────────────────────────────────────────────────────
+📚 DOCUMENTATION
+───────────────────────────────────────────────────────────────────────────
+
+START_PREVIEW.md      → Detailed startup guide
+README.md             → Complete documentation
+API.md                → API documentation  
+QUICK_REFERENCE.md    → Quick command reference
+
+───────────────────────────────────────────────────────────────────────────
+✨ FEATURES
+───────────────────────────────────────────────────────────────────────────
+
+✅ Dashboard with KPI metrics
+✅ Campaign management
+✅ Referral tracking
+✅ Multi-store support
+✅ Commission management
+✅ English & Nepali languages
+✅ Responsive design
+✅ JWT authentication
+
+═══════════════════════════════════════════════════════════════════════════
+
+Ready to go! Run: ./dev.sh
+
+═══════════════════════════════════════════════════════════════════════════

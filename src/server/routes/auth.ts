@@ -44,7 +44,6 @@ router.post('/register', async (req, res) => {
         phone: true,
         role: true,
         organizationId: true,
-        storeIds: true,
         active: true,
         createdAt: true,
         updatedAt: true,
